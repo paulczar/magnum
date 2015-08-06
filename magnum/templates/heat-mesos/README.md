@@ -22,6 +22,28 @@ middleware pre-installed:
 - `mesos`
 - `marathon`
 
+### Building an image
+
+If you do not have a suitable image you can build one easily using one of two methods:
+
+#### Disk Image Builder
+
+See [elements/README.md](elements/README.md) for instructions.
+
+#### Docker
+
+Use the provided [Dockerfile](./Dockerfile) to build the image ( it uses the same DIB scripts as above).  The resultant image will be saved as `/tmp/ubuntu-mesos.qcow2`
+
+```
+$ docker build -t magnum/mesos-builder .
+$ docker run -v /tmp:/output --rm -ti --privileged magnum/mesos_build
+...
+Image file /output/ubuntu-mesos.qcow2 created...
+$ ls /tmp/ubuntu-mesos.qcow2
+
+```
+
+
 ## Creating the stack
 
 Creating an environment file `local.yaml` with parameters specific to
